@@ -1,0 +1,17 @@
+.container{
+    background-color: #f2fee7;
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid #9ff066;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 120rem;
+}
+.acciones{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,34 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+main{
+    background-color: #fff;
+    /* margin: 2rem 0; */
+    padding: 2rem 0;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.form-container{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, .5);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: #357b10;
+    gap: 1rem;
+}

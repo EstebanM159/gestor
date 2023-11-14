@@ -1,0 +1,20 @@
+  <header>
+    <h1>Task manager</h1>
+    <button>Agregar tarea</button> <!-- Este boton invoca al servicio para hacer una nueva tarea -->
+  </header>
+  <div class="form-container">
+    <form class="contenedor">
+      <label for="nombre">Nombre de la tarea</label>
+      <input type="text" name="nombre" id="nombre">
+      <label for="descripcion">descripcion de la tarea</label>
+      <input type="text" name="descripcion" id="descripcion">
+      <input type="submit" value="Agregar">
+    </form>
+    <button>x</button>
+  </div>
+  <main>
+    <!-- cada vez que se renderiza la app deberia hacer la consulta de si hay tareas -->
+    <app-tarea-container></app-tarea-container>
+    <app-tarea-container></app-tarea-container>
+
+  </main>
