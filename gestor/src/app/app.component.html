@@ -1,20 +1,33 @@
   <header>
     <h1>Task manager</h1>
-    <button>Agregar tarea</button> <!-- Este boton invoca al servicio para hacer una nueva tarea -->
+    <button (click)="toggleStatus(true)">Agregar tarea</button> <!-- Este boton invoca al servicio para hacer una nueva tarea -->
   </header>
-  <div class="form-container">
+  <div *ngIf="status" class="form-container">
     <form class="contenedor">
       <label for="nombre">Nombre de la tarea</label>
       <input type="text" name="nombre" id="nombre">
-      <label for="descripcion">descripcion de la tarea</label>
+      <label for="descripcion">Descripcion de la tarea</label>
       <input type="text" name="descripcion" id="descripcion">
-      <input type="submit" value="Agregar">
+      <input class="i-submit" type="submit" value="Agregar">
     </form>
-    <button>x</button>
+    <button (click)="toggleStatus(false)">x</button>
   </div>
   <main>
     <!-- cada vez que se renderiza la app deberia hacer la consulta de si hay tareas -->
     <app-tarea-container></app-tarea-container>
     <app-tarea-container></app-tarea-container>
-
   </main>
+
+  <!-- IDEA DE COMO MANEJAR EL FORMULARIO -->
+  <!-- <form class="formulario" (ngSubmit)="agregarAlCarrito()">
+      <select [(ngModel)]="opcionSeleccionada" name="talle" class="formulario__campo" #opcion="ngModel" required>
+        <option disabled selected>--Seleccionar talla--</option>
+        <option value="chica">Chica</option>
+        <option  value="mediana" >Mediana</option>
+        <option value="grande" >Grande</option>
+      </select>
+      <span class="alerta" [hidden]="opcion.valid || cantidad.pristine">La talla es obligatoria</span>
+      <input class="formulario__campo" #cantidad="ngModel" name="Cantidad" type="number" [(ngModel)]="cant" placeholder="Cantidad" min="1" required="">
+      <span class="alerta" [hidden]="cantidad.valid || cantidad.pristine">La cantidad es obligatoria</span>
+      <input class="formulario__submit" type="submit" value="Agregar Al Carrito" [disabled]="cantidad.invalid || opcion.invalid">
+    </form> -->
