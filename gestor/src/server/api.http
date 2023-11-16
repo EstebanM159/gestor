@@ -5,3 +5,16 @@ GET http://localhost:3333/movies/63B24B8A7D6A11EE9D9318C04D269334
 ###Recuperar peliculas por genero
 GET http://localhost:3333/movies?genre=Action
 ### Crear pelicula con el post
+POST http://localhost:2222/task
+Content-Type: application/json
+
+{
+    "titulo": "The GoodFather",
+    "descripcion": "Francis Ford Coppola",
+    "prioridad": 1,
+    "estado": "pendiente",
+    "favorito": 0
+}
+###BORRAR UNA TAREA
+
+DELETE http://localhost:2222/task/15

@@ -7,23 +7,40 @@ import { task } from './models/task';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  tasks: task[] = [];
   constructor (private taskService : TaskCRUDService){}
+  favorito:number=0;
+  tasks: task[] = [];
+   formModel = {
+    titulo: '',
+    descripcion: '',
+    prioridad: 0,
+    estado: '',
+    favorito: 0
+  };
   title = 'gestor';
   status: boolean = false
-  // FALTA agregar cors al server
  ngOnInit(): void {
-    this.taskService.getTasks().subscribe(
-      (data: task[]) => {
-        this.tasks = data;
-      },
-      (error) => {
-        console.error('Error al obtener tareas:', error);
-      }
-    );
+    this.getTasks();
+  }
+  getTasks(){
+    this.taskService.getTasks().subscribe(data=>{
+      this.tasks = data;
+    });
+  }
+  onSubmit(e:Event) {
+    if(this.formModel.favorito){
+      this.formModel.favorito=1
+    }else{
+      this.formModel.favorito=0
+    }
+    this.taskService.addTask(this.formModel).subscribe(response => {
+      console.log('Respuesta de la API:', response);
+    });
+    
   }
   toggleStatus(valor:boolean){
     this.status= valor
+    this.getTasks()
   }
   
 }
