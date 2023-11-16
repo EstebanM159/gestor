@@ -27,6 +27,9 @@ export class AppComponent implements OnInit{
       this.tasks = data;
     });
   }
+  onTaskDeleted(){
+    console.log('borrado');
+  }
   onSubmit(e:Event) {
     if(this.formModel.favorito){
       this.formModel.favorito=1
