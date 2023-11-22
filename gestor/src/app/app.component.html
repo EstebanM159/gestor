@@ -11,21 +11,41 @@
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" [(ngModel)]="formModel.descripcion" name="descripcion" required></textarea>
 
-        <label for="prioridad">Prioridad:</label>
-        <input type="number" id="prioridad" [(ngModel)]="formModel.prioridad" name="prioridad" required value="1">
+        <!-- <label for="prioridad">Prioridad:</label>
+        <input type="number" id="prioridad" [(ngModel)]="formModel.prioridad" name="prioridad" required value="1"> -->
 
         <label for="estado">Estado:</label>
         <input type="text" id="estado" [(ngModel)]="formModel.estado" name="estado" #estado="ngModel" required>
 
-        <label for="favorito">Favorito:</label>
-        <input type="checkbox" id="favorito" [(ngModel)]="formModel.favorito" name="favorito">
-
         <button class="i-submit" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
     </form>
-  
 
+
+  
     <button (click)="toggleStatus(false)">x</button>
   </div>
+  <div *ngIf="statusUpdate" class="form-container">
+        <form *ngIf="singleTask" (ngSubmit)="onSubmitxUpdate($event)">
+          <Label style="border-bottom: 1px solid #000;">ACTUALIZAR</Label>
+       <label for="titulo">Título:</label>
+        <input type="text" id="titulo" [(ngModel)]="singleTask.titulo" name="titulo" #titulo="ngModel" required>
+ 
+       <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="singleTask.descripcion" name="descripcion" required></textarea>
+
+        <!-- <label for="prioridad">Prioridad:</label>
+        <input type="number" id="prioridad" [(ngModel)]="singleTask.prioridad" name="prioridad" required value="1"> -->
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" [(ngModel)]="singleTask.estado" name="estado" #estado="ngModel" required>
+
+        <button class="i-submit" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
+ 
+ 
+       <!-- <button (click)="updateTask()">Actualizar</button> -->
+     </form>
+     <button (click)="toggleStatusUpdate(false)">x</button>
+  </div>
   <main>
-    <app-tarea-container (taskDeleted)="getTasks()" *ngFor="let tarea of tasks" [data]="tarea"></app-tarea-container>
+    <app-tarea-container (taskToUpdate)="onTaskToUpdate($event)" (taskDeleted)="onTaskDeleted()" *ngFor="let tarea of tasks" [data]="tarea"></app-tarea-container>
   </main>

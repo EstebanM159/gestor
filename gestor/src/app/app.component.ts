@@ -10,40 +10,70 @@ export class AppComponent implements OnInit{
   constructor (private taskService : TaskCRUDService){}
   favorito:number=0;
   tasks: task[] = [];
+  singleTask:task={
+    titulo: '',
+    descripcion: '',
+    prioridad: 0,
+    estado: '',
+    id: 0
+  };
    formModel = {
     titulo: '',
     descripcion: '',
     prioridad: 0,
     estado: '',
-    favorito: 0
+   
   };
   title = 'gestor';
-  status: boolean = false
+  status: boolean = false;
+  statusUpdate :boolean=false;
  ngOnInit(): void {
     this.getTasks();
   }
   getTasks(){
+    
     this.taskService.getTasks().subscribe(data=>{
       this.tasks = data;
     });
   }
   onTaskDeleted(){
-    console.log('borrado');
+    console.log("Borrado")
+    setTimeout(() => {
+      this.getTasks();
+      console.log("Actualizado")
+    }, 300);
+  }
+  // Traigo los datos para colocarlos en los inputs
+  onTaskToUpdate(e:number){
+    this.taskService.getTaskById(e).subscribe((info:any)=>{
+      this.singleTask =info[0]
+      if(this.singleTask){
+        this.toggleStatusUpdate(true)
+      }
+    })
+    return this.singleTask
+  }
+  onSubmitxUpdate(e:Event){
+    // console.log(this.singleTask.id)
+    this.taskService.updateTask(this.singleTask.id,this.singleTask).subscribe(result=>console.log(result)) 
   }
   onSubmit(e:Event) {
-    if(this.formModel.favorito){
-      this.formModel.favorito=1
-    }else{
-      this.formModel.favorito=0
-    }
     this.taskService.addTask(this.formModel).subscribe(response => {
-      console.log('Respuesta de la API:', response);
     });
-    
+    this.formModel = this.formModel = {
+      titulo: '',
+      descripcion: '',
+      prioridad: 0,
+      estado: '',};
+    this.toggleStatus(false);
   }
   toggleStatus(valor:boolean){
-    this.status= valor
-    this.getTasks()
+    this.status= valor;
+    this.getTasks();
+  }
+  toggleStatusUpdate(valor:boolean){
+    this.statusUpdate= valor;
+    this.getTasks();
   }
   
 }

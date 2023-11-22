@@ -4,5 +4,4 @@ export interface task{
     descripcion:string,
     prioridad:number,
     estado:string,
-    favorito:number
 }

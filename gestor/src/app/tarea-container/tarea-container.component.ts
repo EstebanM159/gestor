@@ -8,24 +8,24 @@ import { TaskCRUDService } from '../task-crud.service';
   styleUrls: ['./tarea-container.component.css']
 })
 export class TareaContainerComponent {
-  constructor(private taskservice:TaskCRUDService){}
+  constructor(private taskService:TaskCRUDService){}
   tasks: task[] = [];
   @Input() data!:task;
-   @Output() taskDeleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() taskDeleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() taskToUpdate: EventEmitter<any> = new EventEmitter();
   showId(){
     console.log(this.data.id);
   }
   
   deleteTask() {
-    let borrado = this.taskservice.deleteTask(this.data.id).subscribe();
-    if(borrado){
+    this.taskService.deleteTask(this.data.id).subscribe(()=>{
       this.taskDeleted.emit();
-    }else{
-      // Deberia poder manejarse de otra manera el error?
-      console.log('No se puedo borrar la tarea');
-    }
+    });
   }
-
+  updateTask(){
+    this.taskToUpdate.emit(this.data.id);
+    //emito el evento con la id y desde el padre ejecuto la llamada al servicio
+  }
 
 }
 

@@ -8,8 +8,11 @@ import { Observable } from 'rxjs';
 export class TaskCRUDService {
   
   constructor(private http: HttpClient) { }
-    getTasks(): Observable<task[]> {
+  getTasks(): Observable<task[]> {
     return this.http.get<task[]>('http://localhost:2222/task');
+  }
+  getTaskById(id:number):Observable<task>{
+    return this.http.get<task>(`http://localhost:2222/task/${id}`);
   }
   addTask(data: any):Observable <any>{
     const jsonData = JSON.stringify(data);
@@ -19,8 +22,10 @@ export class TaskCRUDService {
   deleteTask(id:number){
     return this.http.delete(`http://localhost:2222/task/${id}`);
   }
-  updateTask(){
-
+  updateTask(id:number,data:any){
+    const jsonData = JSON.stringify(data);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.patch(`http://localhost:2222/task/${id}`, jsonData, {headers});
   }
   addToFavorite(){
     
