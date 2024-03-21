@@ -1,10 +1,11 @@
-<div class="container">
-    <div class="datos">
+<div class="container row d-flex">
+    <div class="datos col align-item-start">
         <h1>{{data.titulo}}-{{data.id}}</h1>
         <p>{{data.descripcion}}</p>
     </div>
-    <div class="acciones">
-        <button (click)="deleteTask()"><img src="../../assets/trash.png" alt="Eliminar"></button>
-        <button (click)="updateTask()"><img src="../../assets/pencil.png" alt="Editar"></button>
+    <div class="acciones col-2">
+        <button class="btn btn-danger" (click)="deleteTask()"><img src="../../assets/trash.png" alt="Eliminar"></button>
+        <button class="btn btn-primary" (click)="updateTask()"><img src="../../assets/pencil.png" alt="Editar"></button>
     </div>
 </div>
+

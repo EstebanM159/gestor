@@ -1,51 +1,56 @@
-  <header>
+  <header class="py-4">
     <h1>Task manager</h1>
-    <button (click)="toggleStatus(true)">Agregar tarea</button>
+    <button (click)="toggleStatus(true)" class="btn btn-secondary">+</button>
     <!-- <button (click)="getTasks()">*</button> -->
   </header>
-  <div *ngIf="status" class="form-container">
-     <form (ngSubmit)="onSubmit($event)">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" [(ngModel)]="formModel.titulo" name="titulo" #titulo="ngModel" required>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" [(ngModel)]="formModel.descripcion" name="descripcion" required></textarea>
-
-        <!-- <label for="prioridad">Prioridad:</label>
-        <input type="number" id="prioridad" [(ngModel)]="formModel.prioridad" name="prioridad" required value="1"> -->
-
-        <label for="estado">Estado:</label>
-        <input type="text" id="estado" [(ngModel)]="formModel.estado" name="estado" #estado="ngModel" required>
-
-        <button class="i-submit" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
-    </form>
-
-
-  
-    <button (click)="toggleStatus(false)">x</button>
+  <div class="container" *ngIf="status">
+    <div class="row justify-content-center ">
+      <div class="col-md-4 form-container ">
+        <form (ngSubmit)="onSubmit($event)">
+          <div class="form-group">
+            <label class="form-label" for="titulo">Título:</label>
+            <input class="form-control" type="text" id="titulo" [(ngModel)]="formModel.titulo" name="titulo" #titulo="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="descripcion">Descripción:</label>
+            <textarea class="form-control" id="descripcion" [(ngModel)]="formModel.descripcion" name="descripcion" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="estado">Estado:</label>
+            <input class="form-control" type="text" id="estado" [(ngModel)]="formModel.estado" name="estado" #estado="ngModel" required>
+          </div>
+          <button class="i-submit btn btn-secondary" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
+        </form>
+        <button class="btn btn-danger" (click)="toggleStatus(false)">x</button>
+      </div>
+   </div>
   </div>
-  <div *ngIf="statusUpdate" class="form-container">
-        <form *ngIf="singleTask" (ngSubmit)="onSubmitxUpdate($event)">
-          <Label style="border-bottom: 1px solid #000;">ACTUALIZAR</Label>
-       <label for="titulo">Título:</label>
-        <input type="text" id="titulo" [(ngModel)]="singleTask.titulo" name="titulo" #titulo="ngModel" required>
  
-       <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" [(ngModel)]="singleTask.descripcion" name="descripcion" required></textarea>
-
-        <!-- <label for="prioridad">Prioridad:</label>
-        <input type="number" id="prioridad" [(ngModel)]="singleTask.prioridad" name="prioridad" required value="1"> -->
-
-        <label for="estado">Estado:</label>
-        <input type="text" id="estado" [(ngModel)]="singleTask.estado" name="estado" #estado="ngModel" required>
-
-        <button class="i-submit" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
- 
- 
-       <!-- <button (click)="updateTask()">Actualizar</button> -->
-     </form>
-     <button (click)="toggleStatusUpdate(false)">x</button>
+  <div class="container" *ngIf="statusUpdate">
+    <div class="row justify-content-center ">
+      <div class="col-md-4 form-container ">
+        <form (ngSubmit)="onSubmitxUpdate($event)">
+          <Label class="form-label" style="border-bottom: 1px solid #000;">ACTUALIZAR</Label>
+          <div class="form-group">
+              <label class="form-label" for="titulo">Título:</label>
+             <input class="form-control" type="text" id="titulo" [(ngModel)]="singleTask.titulo" name="titulo" #titulo="ngModel" required> 
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="descripcion">Descripción:</label>
+            <textarea class="form-control" id="descripcion" [(ngModel)]="singleTask.descripcion" name="descripcion" required></textarea>  
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="estado">Estado:</label>
+            <input class="form-control" type="text" id="estado" [(ngModel)]="singleTask.estado" name="estado" #estado="ngModel" required>
+          </div>
+          <button class="i-submit btn btn-secondary" [disabled]="titulo.invalid || estado.invalid"  type="submit">Enviar</button>
+        </form>
+        <button class="btn btn-danger" (click)="toggleStatus(false)">x</button>
+      </div>
+   </div>
   </div>
-  <main>
+  <main class="">
     <app-tarea-container (taskToUpdate)="onTaskToUpdate($event)" (taskDeleted)="onTaskDeleted()" *ngFor="let tarea of tasks" [data]="tarea"></app-tarea-container>
   </main>
+   

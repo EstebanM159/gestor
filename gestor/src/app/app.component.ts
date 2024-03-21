@@ -7,6 +7,7 @@ import { task } from './models/task';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+
   constructor (private taskService : TaskCRUDService){}
   favorito:number=0;
   tasks: task[] = [];
@@ -31,7 +32,6 @@ export class AppComponent implements OnInit{
     this.getTasks();
   }
   getTasks(){
-    
     this.taskService.getTasks().subscribe(data=>{
       this.tasks = data;
     });
@@ -55,7 +55,9 @@ export class AppComponent implements OnInit{
   }
   onSubmitxUpdate(e:Event){
     // console.log(this.singleTask.id)
-    this.taskService.updateTask(this.singleTask.id,this.singleTask).subscribe(result=>console.log(result)) 
+    this.taskService.updateTask(this.singleTask.id,this.singleTask).subscribe() 
+    this.toggleStatusUpdate(false);
+    this.getTasks()
   }
   onSubmit(e:Event) {
     this.taskService.addTask(this.formModel).subscribe(response => {
@@ -65,7 +67,7 @@ export class AppComponent implements OnInit{
       descripcion: '',
       prioridad: 0,
       estado: '',};
-    this.toggleStatus(false);
+      this.toggleStatus(false);
   }
   toggleStatus(valor:boolean){
     this.status= valor;

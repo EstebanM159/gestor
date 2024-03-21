@@ -13,10 +13,6 @@ export class TareaContainerComponent {
   @Input() data!:task;
   @Output() taskDeleted: EventEmitter<void> = new EventEmitter<void>();
   @Output() taskToUpdate: EventEmitter<any> = new EventEmitter();
-  showId(){
-    console.log(this.data.id);
-  }
-  
   deleteTask() {
     this.taskService.deleteTask(this.data.id).subscribe(()=>{
       this.taskDeleted.emit();
